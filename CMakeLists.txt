@@ -3,7 +3,7 @@ project(ClangBug)
 
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-Weverything -g3")
+set(CMAKE_CXX_FLAGS "-Weverything -fsanitize=address -fno-unroll-loops")
 set(SOURCE_FILES main.cpp)
 add_executable(ClangBug0 ${SOURCE_FILES})
 add_executable(ClangBug1 ${SOURCE_FILES})

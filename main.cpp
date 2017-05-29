@@ -27,8 +27,9 @@ inline void prolongate(size_t level)
 //    face_data_c[i] = 5;
 //  }
 
-  std::vector<double> face_data_f(num_microvertices_per_face(level-2+1),0.1);
-  std::vector<double> face_data_c(num_microvertices_per_face(level-2),5);
+  std::vector<double> face_data_f(num_microvertices_per_face(level-2+1),0);
+  std::vector<double> face_data_c(num_microvertices_per_face(level-2),1);
+
 
   size_t mr_c = 1;
   size_t mr_f = rowsize_fine + 2;
@@ -64,7 +65,7 @@ inline void prolongate(size_t level)
   for(size_t i = 0; i < face_data_f.size(); ++i){
     sum += face_data_f[i];
   }
-  std::cout << sum << std::endl;
+  std::cout << sum/face_data_f.size() << std::endl;
 }
 
 
