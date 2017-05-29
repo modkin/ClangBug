@@ -15,8 +15,8 @@ inline size_t num_microvertices_per_face(size_t level)
 
 inline void prolongate(size_t level)
 {
-  size_t rowsize_coarse = num_microvertices_per_edge(level);
-  size_t rowsize_fine = num_microvertices_per_edge(level+1);
+  size_t rowsize_coarse = num_microvertices_per_edge(level-2);
+  size_t rowsize_fine = num_microvertices_per_edge(level-2+1);
 
 //  double* face_data_f = (double *) malloc(num_microvertices_per_face(level-2+1)*sizeof(double));
 //  for(int i = 0; i < num_microvertices_per_face(level-2+1)*sizeof(double); ++i){
@@ -60,17 +60,17 @@ inline void prolongate(size_t level)
     rowsize_fine -= 2;
     i_rowsize_coarse -= 1;
   }
-//  double sum = 0;
-//  for(int i = 0; i < face_data_f.size(); ++i){
-//    sum += face_data_f[i];
-//  }
-//  std::cout << sum << std::endl;
+  double sum = 0;
+  for(size_t i = 0; i < face_data_f.size(); ++i){
+    sum += face_data_f[i];
+  }
+  std::cout << sum << std::endl;
 }
 
 
 
 int main()
 {
-  prolongate(6);
+  prolongate(8);
   return 0;
 }

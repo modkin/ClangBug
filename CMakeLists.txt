@@ -3,7 +3,7 @@ project(ClangBug)
 
 
 set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "-Weverything")
+set(CMAKE_CXX_FLAGS "-Weverything -g3")
 set(SOURCE_FILES main.cpp)
 add_executable(ClangBug0 ${SOURCE_FILES})
 add_executable(ClangBug1 ${SOURCE_FILES})
