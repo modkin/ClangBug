@@ -1,15 +1,16 @@
 #include <iostream>
 #include <cmath>
+#include <vector>
 
 inline size_t num_microvertices_per_edge(size_t level)
 {
-  return (size_t) std::pow(2, level) + 1;
+  return static_cast<size_t>(std::pow(2, level) + 1);
 }
 
 
 inline size_t num_microvertices_per_face(size_t level)
 {
-  return (size_t) ((std::pow(2, level)+1) * (std::pow(2, level-1) + 1));
+  return static_cast<size_t>((std::pow(2, level)+1) * (std::pow(2, level-1) + 1));
 }
 
 inline void prolongate(size_t level)
@@ -17,18 +18,17 @@ inline void prolongate(size_t level)
   size_t rowsize_coarse = num_microvertices_per_edge(level);
   size_t rowsize_fine = num_microvertices_per_edge(level+1);
 
-  size_t totalPoints =  num_microvertices_per_face(level);
+//  double* face_data_f = (double *) malloc(num_microvertices_per_face(level-2+1)*sizeof(double));
+//  for(int i = 0; i < num_microvertices_per_face(level-2+1)*sizeof(double); ++i){
+//    face_data_f[i] = 0.1;
+//  }
+//  double* face_data_c = (double *) malloc(num_microvertices_per_face(level-2)*sizeof(double));
+//  for(int i = 0; i < num_microvertices_per_face(level-2)*sizeof(double); ++i){
+//    face_data_c[i] = 5;
+//  }
 
-
-  double* face_data_f = (double *) malloc(num_microvertices_per_face(level-2+1)*sizeof(double));
-  for(int i = 0; i < num_microvertices_per_face(level-2+1)*sizeof(double); ++i){
-    face_data_f[i] = 0.1;
-  }
-  double* face_data_c = (double *) malloc(num_microvertices_per_face(level-2)*sizeof(double));
-  for(int i = 0; i < num_microvertices_per_face(level-2)*sizeof(double); ++i){
-    face_data_c[i] = 5;
-  }
-
+  std::vector<double> face_data_f(num_microvertices_per_face(level-2+1),0.1);
+  std::vector<double> face_data_c(num_microvertices_per_face(level-2),5);
 
   size_t mr_c = 1;
   size_t mr_f = rowsize_fine + 2;
@@ -60,11 +60,11 @@ inline void prolongate(size_t level)
     rowsize_fine -= 2;
     i_rowsize_coarse -= 1;
   }
-  double sum = 0;
-  for(int i = 0; i < num_microvertices_per_face(level-2+1)*sizeof(double); ++i){
-    sum += face_data_f[i];
-  }
-  std::cout << sum << std::endl;
+//  double sum = 0;
+//  for(int i = 0; i < face_data_f.size(); ++i){
+//    sum += face_data_f[i];
+//  }
+//  std::cout << sum << std::endl;
 }
 
 
